@@ -10,6 +10,7 @@ Group: Development/Other
 License: GPL
 URL: http://moin.conetiva.com.br/BuildManager
 Source: bm-%{version}.tar.bz2
+Source1:	%{name}.bash-completion
 Patch: bm-2.1-rpmbuild.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: python >= %pyver
@@ -50,6 +51,10 @@ find %{buildroot}%{py_puresitedir} -name '*.pyc' -exec rm -f {} \;
 python -c "import sys, os, compileall; br='%{buildroot}'; compileall.compile_dir(sys.argv[1], ddir=br and 
 (sys.argv[1][len(os.path.abspath(br)):]+'/') or None)" %{buildroot}%{py_puresitedir}
 
+# bash completion
+install -d -m 755 %{buildroot}%{_sysconfdir}/bash_completion.d
+install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
+
 %clean
 rm -rf %{buildroot}
 
@@ -57,6 +62,7 @@ rm -rf %{buildroot}
 %defattr(0644,root,root,0755)
 %doc LICENSE
 %defattr(-,root,root,-)
+%{_sysconfdir}/bash_completion.d/%{name}
 
 
 
