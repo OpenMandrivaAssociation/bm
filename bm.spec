@@ -4,14 +4,15 @@
 
 Name: bm
 Version: 2.1
-Release: %mkrel 215
+Release: %mkrel 216
 Summary: BuildManager - rpm package building helper
 Group: Development/Other
 License: GPL
 URL: http://moin.conetiva.com.br/BuildManager
 Source: bm-%{version}.tar.bz2
 Source1:	%{name}.bash-completion
-Patch: bm-2.1-rpmbuild.patch
+Patch0: bm-2.1-rpmbuild.patch
+Patch1: bm-2.1-only-move-srpm.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: python >= %pyver
 Requires: rpm-build
@@ -37,7 +38,8 @@ outras possibilidades.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p0
 
 %build
 python setup.py build
