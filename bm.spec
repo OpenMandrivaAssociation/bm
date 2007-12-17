@@ -13,7 +13,6 @@ Source: bm-%{version}.tar.bz2
 Source1:	%{name}.bash-completion
 Patch0: bm-2.1-rpmbuild.patch
 Patch1: bm-2.1-only-move-srpm.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: python >= %pyver
 Requires: rpm-build
 BuildRequires: rpm-build
