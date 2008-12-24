@@ -4,7 +4,7 @@
 
 Name: bm
 Version: 2.1
-Release: %mkrel 218
+Release: %mkrel 219
 Summary: BuildManager - rpm package building helper
 Group: Development/Other
 License: GPL
