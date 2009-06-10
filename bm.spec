@@ -4,7 +4,7 @@
 
 Name: bm
 Version: 2.1
-Release: %mkrel 220
+Release: %mkrel 221
 Summary: BuildManager - rpm package building helper
 Group: Development/Other
 License: GPL
@@ -14,6 +14,7 @@ Source1:	%{name}.bash-completion
 Patch0: bm-2.1-rpmbuild.patch
 Patch1: bm-2.1-only-move-srpm.patch
 Patch2: bm-2.1-use-subprocess.patch
+patch3: bm-2.1-missing-exceptions.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: python >= %pyver
 Requires: rpm-build
@@ -42,6 +43,7 @@ outras possibilidades.
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
+%patch3 -p0
 
 %build
 python setup.py build
