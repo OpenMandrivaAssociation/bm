@@ -11,7 +11,9 @@ License: GPL
 URL: http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/build_system/bm/ 
 Source: bm-%{version}.tar.bz2
 Source1:	%{name}.bash-completion
+Patch0: bm-2.1-rpmbuild.patch
 Patch1: bm-2.1-only-move-srpm.patch
+Patch2: bm-2.1-use-subprocess.patch
 patch3: bm-2.1-missing-exceptions.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: python >= %pyver
@@ -38,7 +40,9 @@ outras possibilidades.
 
 %prep
 %setup -q
+%patch0 -p1
 %patch1 -p0
+%patch2 -p1
 %patch3 -p0
 
 %build
