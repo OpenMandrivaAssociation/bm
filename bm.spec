@@ -4,7 +4,7 @@
 
 Name: bm
 Version: 2.1
-Release: %mkrel 224
+Release: 225
 Summary: BuildManager - rpm package building helper
 Group: Development/Other
 License: GPL
@@ -15,6 +15,7 @@ Patch0: bm-2.1-rpmbuild.patch
 Patch1: bm-2.1-only-move-srpm.patch
 Patch2: bm-2.1-use-subprocess.patch
 patch3: bm-2.1-missing-exceptions.patch
+Patch4: bm-2.1-unpack-nodeps.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: python >= %pyver
 Requires: rpm-build
