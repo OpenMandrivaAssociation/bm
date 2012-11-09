@@ -1,0 +1,11 @@
+--- ./BuildManager/package.py.orig	2011-05-17 14:41:37.000000000 -0300
++++ ./BuildManager/package.py	2011-05-17 14:41:42.000000000 -0300
+@@ -182,7 +182,7 @@ class _package_rpm(_package):
+             return builddir
+     
+     def _install_srpm(self):
+-        cmd = "rpm -i --define '_topdir %s' %s &> %s"%(self.builddir,self.file,self.log)
++        cmd = "rpm -i --nodeps --define '_topdir %s' %s &> %s"%(self.builddir,self.file,self.log)
+         status, output = commands.getstatusoutput(cmd)
+         if status != 0:
+             raise Error, "error installing package "+self.file

@@ -1,0 +1,15 @@
+diff -ur bm-2.1/BuildManager/build.py bm-2.1.acme/BuildManager/build.py
+--- bm-2.1/BuildManager/build.py	2003-11-20 15:37:22.000000000 -0200
++++ bm-2.1.acme/BuildManager/build.py	2004-01-17 14:58:57.843281631 -0200
+@@ -198,9 +198,9 @@
+                 tmppath = " --define '_tmppath %s/BUILDROOT'" % pkg.builddir
+             else:
+                 tmppath = ""
+-            cmd = "rpm -b%s --define '_topdir %s'%s %s %s 2>&1" % \
++            cmd = "rpmbuild -b%s --define '_topdir %s'%s %s %s 2>&1" % \
+                   (stagechar,pkg.builddir,tmppath,passtrough,pkg.spec)
+-            logger.debug("rpm command: "+cmd)
++            logger.debug("rpmbuild command: "+cmd)
+             if not dryrun:
+                 log = open(pkg.log, "w")
+                 pop = popen2.Popen3(cmd)

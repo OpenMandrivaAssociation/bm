@@ -1,0 +1,15 @@
+Missing exceptions used by BuildManager.package, as pointed by pzanoni.
+
+===================================================================
+--- BuildManager/package.py     (revisão 257807)
++++ BuildManager/package.py     (revisão 257808)
+@@ -6,6 +6,9 @@
+ import os
+ import re
+
++class BuildManagerFileError(Error): pass
++class BuildManagerPackageError(Error): pass
++
+ try:
+     import rpm
+ except ImportError:

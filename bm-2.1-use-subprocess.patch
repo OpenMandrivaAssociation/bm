@@ -1,0 +1,48 @@
+diff -p -up bm-2.1/BuildManager/build.py.orig bm-2.1/BuildManager/build.py
+--- bm-2.1/BuildManager/build.py.orig	2009-01-16 15:12:08.000000000 -0200
++++ bm-2.1/BuildManager/build.py	2009-01-16 15:11:40.000000000 -0200
+@@ -2,10 +2,7 @@ from BuildManager.fileutil import *
+ from BuildManager.package import *
+ from BuildManager import *
+ import thread
+-import popen2
+-import select
+-import fcntl
+-import thread
++import subprocess
+ import sys, os
+ import time
+ import shutil
+@@ -204,22 +201,18 @@ def buildpkg(pkg, stage, unpack_dir, pas
+             logger.debug("rpmbuild command: "+cmd)
+             if not dryrun:
+                 log = open(pkg.log, "w")
+-                pop = popen2.Popen3(cmd)
+-                fc = pop.fromchild
+-                flags = fcntl.fcntl (fc.fileno(), fcntl.F_GETFL, 0)
+-                flags = flags | os.O_NONBLOCK
+-                fcntl.fcntl (fc.fileno(), fcntl.F_SETFL, flags)
+-                while 1:
+-                    r,w,x = select.select([fc.fileno()], [], [], 2)
+-                    if r:
+-                        data = fc.read()
+-                        if show_log:
+-                            sys.stdout.write(data)
+-                        log.write(data)
+-                        log.flush()
++                pop = subprocess.Popen(cmd, shell=True,
++                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
++                of = pop.stdout.fileno()
++                while True:
+                     status = pop.poll()
+-                    if status != -1:
++                    if status is not None:
+                         break
++                    data = os.read(of, 8192)
++                    log.write(data)
++                    log.flush()
++                    if show_log:
++                        sys.stdout.write(data)
+                 log.close()
+         if status == 0:
+             logger.info("succeeded!")

@@ -1,0 +1,21 @@
+=== modified file 'BuildManager/build.py'
+--- BuildManager/build.py	2007-05-07 21:32:38 +0000
++++ BuildManager/build.py	2007-09-19 17:39:21 +0000
+@@ -9,6 +9,7 @@
+ import sys, os
+ import time
+ import shutil
++import glob
+ 
+ __all__ = ["PackageBuilder"]
+ 
+@@ -100,7 +101,7 @@
+                             os.unlink(pkg.file)
+                 if self.opts.move_srpm:
+                     dir = os.path.join(pkg.builddir, "SRPMS")
+-                    for file in os.listdir(dir):
++                    for file in glob.glob(os.path.join(dir, "*.src.rpm")):
+                         move_file(os.path.join(dir, file),
+                                   self.opts.move_srpm,
+                                   dryrun=self.opts.dryrun)
+
