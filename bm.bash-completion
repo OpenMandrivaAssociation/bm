@@ -1,0 +1,45 @@
+# bm(1) completion
+# $Id: bm 397 2007-06-14 22:13:08Z guillomovitch $
+
+_bm()
+{
+	local cur prev
+
+	COMPREPLY=()
+	cur=${COMP_WORDS[COMP_CWORD]}
+	prev=${COMP_WORDS[COMP_CWORD-1]}
+
+	# --name=value style option
+	if [[ "$cur" == *=* ]]; then
+		prev=${cur/=*/}
+		cur=${cur/*=/}
+		case $prev in
+			--@(unpack-dir|move-@(srpm|rpm|log)|move-@(failed|succeeded)-srpm|copy-@(failed|succeeded)-srpm|move-failed-log|filter-@(renew|refresh)))
+				_filedir -d
+				return 0;
+				;;
+			--build-log)
+				_filedir
+				return 0;
+				;;
+		esac
+	fi
+
+
+	if [[ "$cur" == -* ]]; then
+		COMPREPLY=( $( compgen -W '--version -h --help -a -u -p -c -i \
+			-s -b -l -j -o --unpack-dir= --build-log= --move-srpm= \
+			--move-rpm= --move-failed-srpm= --copy-failed-srpm= \
+			--remove-failed-srpm --move-succeeded-srpm= \
+			--copy-succeeded-srpm= --remove-succeeded-srpm \
+			--move-log= --move-failed-log= --filter-renew= \
+			--filter-refresh= --clean --clean-on-success --ignore= \
+			--sign --nodeps --debug --short-circuit --with \
+			--without --define --target --dryrun --log=' -- $cur ) )
+	else
+		_filedir '@(spec|src.rpm)'
+	fi
+
+}
+complete -F _bm $filenames bm
+
