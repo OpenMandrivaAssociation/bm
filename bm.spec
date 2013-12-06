@@ -4,7 +4,7 @@
 
 Name: bm
 Version: 2.1
-Release: 228
+Release: 229
 Summary: BuildManager - rpm package building helper
 Group: Development/Other
 License: GPL
