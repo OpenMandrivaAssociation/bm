@@ -8,7 +8,7 @@ Release: 232
 Summary: BuildManager - rpm package building helper
 Group: Development/Other
 License: GPL
-URL: http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/build_system/bm/ 
+URL: https://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/build_system/bm/ 
 Source: bm-%{version}.tar.bz2
 Source1:	%{name}.bash-completion
 Patch0: bm-2.1-rpmbuild.patch
